@@ -32,3 +32,8 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
+# Remove Platforms and Credential Files
+android/
+ios/
+credentials.ts
