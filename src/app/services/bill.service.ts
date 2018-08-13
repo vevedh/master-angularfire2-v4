@@ -32,7 +32,7 @@ export class BillService {
   createBill(
     name: string,
     amount: number,
-    dueDate: Date = null,
+    dueDate: any = null,
     paid: boolean = false
   ): Promise<any> {
     const newBillRef: firebase.database.ThenableReference = this.billList.push({});
@@ -40,7 +40,7 @@ export class BillService {
     return newBillRef.set({
       name,
       amount,
-      dueDate,
+      dueDate: `${dueDate.year.value}-${dueDate.month.value - 1}-${dueDate.day.value}`,
       paid,
       id: newBillRef.key,
     });
