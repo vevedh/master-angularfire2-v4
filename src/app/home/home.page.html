@@ -14,15 +14,17 @@
     <ion-list-header>
       UnPaid Bills
     </ion-list-header>
-    <ion-item *ngFor="let bill of billList | async" (click)="moreBillOptions(bill.id)" [class.hide]="bill.paid == true">
+    <ion-item *ngFor="let bill of billList | async" (click)="moreBillOptions(bill.id)" [class.hide]="bill.paid === true">
       <ion-icon name="timer" color="danger" slot="end"></ion-icon>
-      <h2>{{bill.name}}</h2>
-      <h3>Total:
-        <strong>${{bill.amount}}</strong>
-      </h3>
-      <p>Pay before:
-        <strong>{{bill.dueDate}}</strong>
-      </p>
+      <ion-label>
+        <h2>{{bill.name}}</h2>
+        <h3>Total:
+          <strong>${{bill.amount}}</strong>
+        </h3>
+        <p>Pay before:
+          <strong>{{bill.dueDate}}</strong>
+        </p>
+      </ion-label>
     </ion-item>
   </ion-list>
 
@@ -30,12 +32,14 @@
     <ion-list-header>
       Paid Bills
     </ion-list-header>
-    <ion-item *ngFor="let bill of billList | async" href="/bill-detail/{{bill.id}}" [class.hide]="bill.paid == false">
-      <ion-icon name="checkmark" color="favorite" slot="end"></ion-icon>
-      <h2>{{bill.name}}</h2>
-      <h3>Total:
-        <strong>${{bill.amount}}</strong>
-      </h3>
+    <ion-item *ngFor="let bill of billList | async" href="/bill-detail/{{bill.id}}" [class.hide]="bill.paid === false">
+      <ion-icon name="checkmark" color="secondary" slot="end"></ion-icon>
+      <ion-label>
+        <h2>{{bill.name}}</h2>
+        <h3>Total:
+          <strong>${{bill.amount}}</strong>
+        </h3>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
