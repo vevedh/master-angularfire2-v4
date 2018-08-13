@@ -25,16 +25,18 @@ export class AuthService {
   linkAccount(email: string, password: string): Promise<any> {
     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
 
-    return this.afAuth.auth.currentUser.linkWithCredential(credential).then(
-      user => {
-        this.afDatabase.object(`/userProfile/${user.uid}`).update({
-          email: email,
-        });
-      },
-      error => {
-        console.log('There was an error linking the account', error);
-      }
-    );
+    return this.afAuth.auth.currentUser
+      .linkAndRetrieveDataWithCredential(credential)
+      .then(
+        userCredential => {
+          this.afDatabase.object(`/userProfile/${userCredential.user.uid}`).update({
+            email: email,
+          });
+        },
+        error => {
+          console.log('There was an error linking the account', error);
+        }
+      );
   }
 
   resetPassword(email: string): Promise<any> {
