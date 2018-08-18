@@ -27,7 +27,7 @@ export class ResetPasswordPage implements OnInit {
 
   async resetPassword(resetPasswordForm): Promise<void> {
     try {
-      const email: string = this.resetPasswordForm.value.email;
+      const email: string = resetPasswordForm.value.email;
       await this.authService.resetPassword(email);
 
       const alert = await this.alertCtrl.create({
